@@ -1,0 +1,51 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#keyboard {
+	width: 1000px;
+	height: 350px;
+	border: 4px solid #ccc;
+	background-color: #cdd;
+}
+
+#controls {
+	width: 100%;
+	height: 30%;
+	background-color: #ddc
+}
+
+#keys {
+	width: 100%;
+	height: 70%;
+	margin: 0 auto;
+	background-color: #dcd;
+}
+
+#keysLow {
+	display: inline-block;
+	width: 646px;
+}
+
+#keysHigh {
+	display: inline-block;
+	width: 340px;
+}
+
+.keyWhite {
+	display: inline-block;
+	width: 68px;
+	height: 245px;
+	margin: 0px;
+	background-color: #fff;
+}
+.keyBlack {
+	display: inline-block;
+	width: 34px;
+	height: 140px;
+	margin: 0px;
+	background-color: #000;
+	color: #fff;
+}
