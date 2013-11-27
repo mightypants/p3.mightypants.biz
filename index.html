@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
-	<link rel="stylesheet" href="css/styles.css" type="text/css">
-	<script src="js/jquery-1.10.2.min.js"></script>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="css/cupertino/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/jquery.jWebAudio.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.js"></script>
+    
 </head>
-<body>
 
-<div id="audioFiles"></div>
-	
-	
-<div id="keyboard">
-	<div id="controls"></div>
-	<div id="keys">
-		<div id="keysLow"><div class="keyWhite" id="C">C</div><div class="keyBlack" id="Cs">C#</div><div class="keyWhite" id="D">D</div><div class="keyBlack" id="Ds">D#</div><div class="keyWhite" id="E">E</div><div class="keyWhite" id="F">F</div><div class="keyBlack" id="Fs">F#</div><div class="keyWhite" id="G">G</div><div class="keyBlack" id="Gs">G#</div><div class="keyWhite" id="A">A</div><div class="keyBlack" id="As">A#</div><div class="keyWhite" id="B">B</div></div><div id="keysHigh"><div class="keyWhite" id="up_C">C</div><div class="keyBlack" id="up_Cs">C#</div><div class="keyWhite" id="up_D">D</div><div class="keyBlack" id="up_Ds">D#</div><div class="keyWhite" id="up_E">E</div><div class="keyWhite" id="up_F">F</div></div></div>
+<body>
+<div id="audioFiles">
+
 </div>
 
-<p></p>
+<div id="keyboard">
+    <div id="controls">
+        <form action="">
+            <select name="instrument">
+            <option value="piano">Piano</option>
+            <option value="epiano">Electric Piano</option>
+            
+            </select>
+        </form>
+        <p id="octaveReadout"></p>
+    </div>
+    <div id="keys">
+        <div id="keysLow"><div class="keyWhite" id="C"></div><div class="keyBlack" id="Cs"></div><div class="keyWhite" id="D"></div><div class="keyBlack" id="Ds"></div><div class="keyWhite" id="E"></div><div class="keyWhite" id="F"></div><div class="keyBlack" id="Fs"></div><div class="keyWhite" id="G"></div><div class="keyBlack" id="Gs"></div><div class="keyWhite" id="A"></div><div class="keyBlack" id="As"></div><div class="keyWhite" id="B"></div></div><div id="keysHigh"><div class="keyWhite" id="up_C"></div><div class="keyBlack" id="up_Cs"></div><div class="keyWhite" id="up_D"></div><div class="keyBlack" id="up_Ds"></div><div class="keyWhite" id="up_E"></div><div class="keyWhite" id="up_F"></div></div>
+    </div>
+</div>
 
-<form><input type="text" size="24" / ></form>
-<input type="text" />
+    <p id="octaveUp">up</p><p id="octaveDown">down</p>
+    <p id="test1"></p>
 
-<script src="js/keyboard.js"></script>	
+<input type="text" name="date" id="date" />
+<script src="js/keyboard.js"></script>
 
 </body>
 </html>
