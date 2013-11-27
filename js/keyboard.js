@@ -124,7 +124,7 @@ function selectAudioEl(pnoKeyID, action){
 		noteOctave = octaveOffset + 1;
 		audioElID = pnoKeyID + octaveOffset;
 	}
-	console.log(audioElID);
+	
 
 	if (action == 'play') {
 		playNote(audioElID);
@@ -138,7 +138,9 @@ function selectAudioEl(pnoKeyID, action){
 play the audio file for the called note
 ******************************************************************************************/
 function playNote(audioID) {
+	console.log(audioID);
     $('#' + audioID).jWebAudio('play');
+    $('#' + audioID + 'V').jWebAudio('play');
 }
 
 /******************************************************************************************
@@ -181,6 +183,7 @@ stop all audio files
 function stopAllNotes(){
 	$('.sound').each(function() {
     	$(this).jWebAudio('stop');
+    	console.log(this);
 });
 }
 
