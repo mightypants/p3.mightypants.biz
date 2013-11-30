@@ -37,7 +37,7 @@ $('.sound').each(function() {
     $(this).jWebAudio('load');
 });
 
-$('#octaveReadout').html(octaveOffset - 1);
+
 
 /****************************************************************************
 event listeners
@@ -56,26 +56,34 @@ $('body').keyup(function(){
 });
 
 $('#octaveUp').click(function(){
-	if(octaveOffset < 2) {
-		octaveOffset++;
-		$('#octaveReadout').empty();
-		$('#octaveReadout').text(octaveOffset - 1);
-	}
+	octaveUp();
 });
 
 $('#octaveDown').click(function(){
-	if(octaveOffset > 0) {
-		octaveOffset--;
-		$('#octaveReadout').html(octaveOffset - 1);
-		stopAllNotes();
-	}
+	octaveDown();
 });
 
 /******************************************************************************************
-load audio files
+change octaves
 ******************************************************************************************/
 
+function octaveUp() {
+	if(octaveOffset < 2) {
+		octaveOffset++;
+		octaveImgURL = 'images/oct_' + (octaveOffset -1) + '.png';
+		$('#octaveNum').attr('src', octaveImgURL);
+		stopAllNotes();
+	}
+}
 
+function octaveDown(){
+	if(octaveOffset > 0) {
+		octaveOffset--;
+		octaveImgURL = 'images/oct_' + (octaveOffset -1) + '.png';
+		$('#octaveNum').attr('src', octaveImgURL);
+		stopAllNotes();
+	}
+}
 
 /******************************************************************************************
 when computer keyboard key is pressed, map to corresponding piano key div ID
@@ -138,9 +146,8 @@ function selectAudioEl(pnoKeyID, action){
 play the audio file for the called note
 ******************************************************************************************/
 function playNote(audioID) {
-	console.log(audioID);
     $('#' + audioID).jWebAudio('play');
-    $('#' + audioID + 'V').jWebAudio('play');
+    //$('#' + audioID + 'V').jWebAudio('play');
 }
 
 /******************************************************************************************
@@ -183,7 +190,6 @@ stop all audio files
 function stopAllNotes(){
 	$('.sound').each(function() {
     	$(this).jWebAudio('stop');
-    	console.log(this);
 });
 }
 

@@ -15,25 +15,23 @@
 </div>
 
 <div id="keyboard">
-    <div id="controls">
-        <form action="">
-            <select name="instrument">
-            <option value="piano">Piano</option>
-            <option value="epiano">Electric Piano</option>
+    <div id="controlArea">
+        <div id="controls">
+            <div id="octaveControl"><p id="octaveUp">up</p><p id="octaveDown">down</p></div>
+            <div id="octaveReadout"><img id="octaveNum" src="images/oct_0.png" /></div>
+            <div id="instrumentReadout"><img src="images/e_piano_txt.png" /></div>
+            <div id="instrumentControl"></div>
             
-            </select>
-        </form>
-        <p id="octaveReadout"></p>
+        </div>
     </div>
     <div id="keys">
-        <div id="keysLow"><div class="keyWhite" id="C">C</div><div class="keyBlack" id="Cs">C#</div><div class="keyWhite" id="D">D</div><div class="keyBlack" id="Ds">D#</div><div class="keyWhite" id="E">E</div><div class="keyWhite" id="F">F</div><div class="keyBlack" id="Fs">F#</div><div class="keyWhite" id="G">G</div><div class="keyBlack" id="Gs">G#</div><div class="keyWhite" id="A">A</div><div class="keyBlack" id="As">A#</div><div class="keyWhite" id="B">B</div></div><div id="keysHigh"><div class="keyWhite" id="up_C">C</div><div class="keyBlack" id="up_Cs">C#</div><div class="keyWhite" id="up_D">D</div><div class="keyBlack" id="up_Ds">D#</div><div class="keyWhite" id="up_E">E</div><div class="keyWhite" id="up_F">F</div></div>
+        <div id="keysLow"><div class="keyWhite" id="C"></div><div class="keyBlack" id="Cs"></div><div class="keyWhite" id="D"></div><div class="keyBlack" id="Ds"></div><div class="keyWhite" id="E"></div> <div class="keyWhite" id="F"></div><div class="keyBlack" id="Fs"></div><div class="keyWhite" id="G"></div><div class="keyBlack" id="Gs"></div><div class="keyWhite" id="A"></div><div class="keyBlack" id="As"></div><div class="keyWhite" id="B"></div></div><div id="keysHigh"><div class="keyWhite" id="up_C"></div><div class="keyBlack" id="up_Cs"></div><div class="keyWhite" id="up_D"></div><div class="keyBlack" id="up_Ds"></div><div class="keyWhite" id="up_E"></div><div class="keyWhite" id="up_F"></div></div>
     </div>
 </div>
 
-    <p id="octaveUp">up</p><p id="octaveDown">down</p>
     <p id="test1"></p>
 
-<input type="text" name="date" id="date" />
+
 <script src="js/keyboard.js"></script>
 
 </body>
