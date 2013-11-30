@@ -1,8 +1,11 @@
 /****************************************************************************
 setup audio elements and files; initialize keyboard options
 ****************************************************************************/
+
 var notes = Array('C','Cs','D','Ds','E','F','Fs','G','Gs','A','As','B');
 var octaveOffset = 1;
+var instruments = ['piano','epiano','chiken']
+var currInstrument = instruments[1];
 
 for(i in notes) {
 	//notes C through F appear on the keyboard twice each, others only once
@@ -22,8 +25,8 @@ for(i in notes) {
 	}
 
 	for(j = 0; j < numOctavesOnKB; j++){
-		$('#audioFiles').append('<audio id="'+ notes[i] + j +'" class="sound"><p>Your browser does not support the audio element </p></audio>');
-		$('#audioFiles').append('<audio id="'+ notes[i] + j +'V" class="sound"><p>Your browser does not support the audio element </p></audio>');
+		$('#audioFiles').append('<audio id="'+ notes[i] + j + 'piano" class="sound"><p>Your browser does not support the audio element </p></audio>');
+		$('#audioFiles').append('<audio id="'+ notes[i] + j + 'epiano" class="sound"><p>Your browser does not support the audio element </p></audio>');
 	}
 }
 
@@ -32,11 +35,10 @@ $('.sound').each(function() {
 	var url = 'audio/' + $(this).attr('id') + '.mp3';
 	$(this).jWebAudio('addSoundSource', {
         'url': url,
-        'volume': parseInt(100)
+        'volume': parseInt(80)
 	});
     $(this).jWebAudio('load');
 });
-
 
 
 /****************************************************************************
@@ -55,6 +57,12 @@ $('body').keyup(function(){
 	mapKeys(event.which, 'stop');
 });
 
+$('.btn_up,.btn_down').hover(function(){
+	$(this).attr('src', 'images/' + $(this).attr('class') + '_hover.png');
+},function(){
+	$(this).attr('src', 'images/' + $(this).attr('class'));	
+});
+
 $('#octaveUp').click(function(){
 	octaveUp();
 });
@@ -62,6 +70,36 @@ $('#octaveUp').click(function(){
 $('#octaveDown').click(function(){
 	octaveDown();
 });
+
+$('#instrumentUp').click(function(){
+	nextInstrument();
+});
+
+$('#instrumentDown').click(function(){
+	prevInstrument();
+});
+
+
+/******************************************************************************************
+change instruments
+******************************************************************************************/
+
+function nextInstrument() {
+	i = instruments.indexOf(currInstrument);
+	j = i < 2 ? i++ : i -= 2;
+	currInstrument = instruments[i];
+	$('#instrumentName').attr('src', 'images/' + currInstrument + '_txt.png');
+	stopAllNotes();
+}
+
+function prevInstrument(){
+	i = instruments.indexOf(currInstrument);
+	j = i > 0 ? i-- : i += 2;
+	currInstrument = instruments[i];
+	$('#instrumentName').attr('src', 'images/' + currInstrument + '_txt.png');
+	stopAllNotes();	
+}
+
 
 /******************************************************************************************
 change octaves
@@ -84,6 +122,7 @@ function octaveDown(){
 		stopAllNotes();
 	}
 }
+
 
 /******************************************************************************************
 when computer keyboard key is pressed, map to corresponding piano key div ID
@@ -111,10 +150,11 @@ function mapKeys(compKeyID, action){
 		222: 'up_F' 
 	};
 
-	if( !(!(compKeyID in keyMap)) ) {
+	if(compKeyID in keyMap) {
 		selectAudioEl(keyMap[compKeyID], action);
 	}	
 }
+
 
 /******************************************************************************************
 select the appropriate audio element to play or stop, based on current note, octave, etc.
@@ -126,35 +166,41 @@ function selectAudioEl(pnoKeyID, action){
 
 	if(pnoKeyID.search('up') != -1){
 		noteOctave = octaveOffset + 1;
-		audioElID = pnoKeyID.split("_").pop() + noteOctave;
+		audioElID = pnoKeyID.split("_").pop() + noteOctave + currInstrument;
 	}
 	else{
 		noteOctave = octaveOffset + 1;
-		audioElID = pnoKeyID + octaveOffset;
+		audioElID = pnoKeyID + octaveOffset + currInstrument;
 	}
 	
 
 	if (action == 'play') {
 		playNote(audioElID);
+		$('#' + pnoKeyID).css('opacity',.7);
 	}
 	else {
 		stopNote(audioElID);
+		$('#' + pnoKeyID).css('opacity',0);
 	}	
 }
+
 
 /******************************************************************************************
 play the audio file for the called note
 ******************************************************************************************/
+
 function playNote(audioID) {
     $('#' + audioID).jWebAudio('play');
     //$('#' + audioID + 'V').jWebAudio('play');
 }
 
+
 /******************************************************************************************
 stop the audio file for the called note
 ******************************************************************************************/
+
 function stopNote(audioID) {
-	var vol = 100;
+	var vol = 80;
 
 	//do short fadeout when stopping the note to avoid pops
 	var fadeOut = setInterval(
@@ -183,6 +229,7 @@ function stopNote(audioID) {
 	);
 }
 
+
 /******************************************************************************************
 stop all audio files
 ******************************************************************************************/
@@ -192,8 +239,6 @@ function stopAllNotes(){
     	$(this).jWebAudio('stop');
 });
 }
-
-
 
 
 

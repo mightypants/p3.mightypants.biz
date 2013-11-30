@@ -10,22 +10,34 @@
 </head>
 
 <body>
-<div id="audioFiles">
-
-</div>
-
+<div id="audioFiles"></div>
+<div id="banner">?</div>
 <div id="keyboard">
     <div id="controlArea">
         <div id="controls">
-            <div id="octaveControl"><p id="octaveUp">up</p><p id="octaveDown">down</p></div>
+            <div id="octaveControl">
+                <div id="octaveDown">
+                    <img class="btn_down" id="oct_down" src="images/btn_down.png" alt="octave down" />
+                </div>
+                <div id="octaveUp">
+                    <img class="btn_up" id="oct_up" src="images/btn_up.png" alt="octave up" />
+                </div>
+            </div>
             <div id="octaveReadout"><img id="octaveNum" src="images/oct_0.png" /></div>
-            <div id="instrumentReadout"><img src="images/e_piano_txt.png" /></div>
-            <div id="instrumentControl"></div>
+            <div id="instrumentReadout"><img id="instrumentName" src="images/epiano_txt.png" /></div>
+            <div id="instrumentControl">
+                <div id="instrumentDown">
+                    <img class="btn_down" id="oct_down" src="images/btn_down.png" alt="instrument down" />
+                </div>
+                <div id="instrumentUp">
+                    <img class="btn_up" id="oct_up" src="images/btn_up.png" alt="instrument up" />
+                </div>
+            </div>
             
         </div>
     </div>
     <div id="keys">
-        <div id="keysLow"><div class="keyWhite" id="C"></div><div class="keyBlack" id="Cs"></div><div class="keyWhite" id="D"></div><div class="keyBlack" id="Ds"></div><div class="keyWhite" id="E"></div> <div class="keyWhite" id="F"></div><div class="keyBlack" id="Fs"></div><div class="keyWhite" id="G"></div><div class="keyBlack" id="Gs"></div><div class="keyWhite" id="A"></div><div class="keyBlack" id="As"></div><div class="keyWhite" id="B"></div></div><div id="keysHigh"><div class="keyWhite" id="up_C"></div><div class="keyBlack" id="up_Cs"></div><div class="keyWhite" id="up_D"></div><div class="keyBlack" id="up_Ds"></div><div class="keyWhite" id="up_E"></div><div class="keyWhite" id="up_F"></div></div>
+        <div id="keysLow"><div class="keyWhite blackRight" id="C"></div><div class="keyBlack" id="Cs"></div><div class="keyWhite blackBoth" id="D"></div><div class="keyBlack" id="Ds"></div><div class="keyWhite blackLeft" id="E"></div> <div class="keyWhite blackRight" id="F"></div><div class="keyBlack" id="Fs"></div><div class="keyWhite blackBoth" id="G"></div><div class="keyBlack" id="Gs"></div><div class="keyWhite blackBoth" id="A"></div><div class="keyBlack" id="As"></div><div class="keyWhite blackLeft" id="B"></div></div><div id="keysHigh"><div class="keyWhite blackRight" id="up_C"></div><div class="keyBlack" id="up_Cs"></div><div class="keyWhite blackBoth" id="up_D"></div><div class="keyBlack blackBoth" id="up_Ds"></div><div class="keyWhite blackLeft" id="up_E"></div><div class="keyWhite blackNone" id="up_F"></div></div>
     </div>
 </div>
 
