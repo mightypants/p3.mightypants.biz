@@ -4,7 +4,7 @@ setup audio elements and files; initialize keyboard options
 
 var notes = Array('C','Cs','D','Ds','E','F','Fs','G','Gs','A','As','B');
 var octaveOffset = 1;
-var instruments = ['piano','epiano','chiken']
+var instruments = ['bass','epiano','marimba']
 var currInstrument = instruments[1];
 
 for(i in notes) {
@@ -25,8 +25,9 @@ for(i in notes) {
 	}
 
 	for(j = 0; j < numOctavesOnKB; j++){
-		$('#audioFiles').append('<audio id="'+ notes[i] + j + 'piano" class="sound"><p>Your browser does not support the audio element </p></audio>');
+		$('#audioFiles').append('<audio id="'+ notes[i] + j + 'bass" class="sound"><p>Your browser does not support the audio element </p></audio>');
 		$('#audioFiles').append('<audio id="'+ notes[i] + j + 'epiano" class="sound"><p>Your browser does not support the audio element </p></audio>');
+		$('#audioFiles').append('<audio id="'+ notes[i] + j + 'marimba" class="sound"><p>Your browser does not support the audio element </p></audio>');
 	}
 }
 
@@ -40,6 +41,22 @@ $('.sound').each(function() {
     $(this).jWebAudio('load');
 });
 
+$("#keyboard").fadeIn(800);
+
+$("#help").click(function(){
+  $("#help").animate({
+    position: 'absolute',
+    left:'0px',
+    top:'0px',
+    opacity:'.3',
+    height:'10px',
+    width:'10px'
+  }, 'slow');
+});
+
+$(function() {
+    $( ".draggable" ).draggable();
+  });
 
 /****************************************************************************
 event listeners
@@ -54,10 +71,12 @@ $('body').keydown(function(){
 });
 
 $('body').keyup(function(){
-	mapKeys(event.which, 'stop');
+	if(currInstrument != 'marimba') {
+		mapKeys(event.which, 'stop');
+	}
 });
 
-$('.btn_up,.btn_down').hover(function(){
+$('.btn_up,.btn_down,.btn').hover(function(){
 	$(this).attr('src', 'images/' + $(this).attr('class') + '_hover.png');
 },function(){
 	$(this).attr('src', 'images/' + $(this).attr('class'));	
@@ -175,31 +194,34 @@ function selectAudioEl(pnoKeyID, action){
 	
 
 	if (action == 'play') {
-		playNote(audioElID);
-		$('#' + pnoKeyID).css('opacity',.7);
+		playNote(audioElID, pnoKeyID);
 	}
 	else {
-		stopNote(audioElID);
-		$('#' + pnoKeyID).css('opacity',0);
+		stopNote(audioElID, pnoKeyID);
 	}	
 }
 
 
 /******************************************************************************************
-play the audio file for the called note
+play the audio file for the called note, highlight the key on the keyboard
 ******************************************************************************************/
 
-function playNote(audioID) {
+function playNote(audioID, pnoKeyID) {
     $('#' + audioID).jWebAudio('play');
-    //$('#' + audioID + 'V').jWebAudio('play');
+    $('#' + pnoKeyID).css('opacity',.7);
+
+    if(currInstrument == 'marimba') {
+    	//setTimeout(stopNote(audioID, pnoKeyID), 000);
+    	//console.log('stop you stupid marimba');
+    }
 }
 
 
 /******************************************************************************************
-stop the audio file for the called note
+stop the audio file for the called note, remove highlight from played key
 ******************************************************************************************/
 
-function stopNote(audioID) {
+function stopNote(audioID, pnoKeyID) {
 	var vol = 80;
 
 	//do short fadeout when stopping the note to avoid pops
@@ -227,6 +249,9 @@ function stopNote(audioID) {
 		}, 
 		1 //miliseconds for setInterval
 	);
+
+	$('#' + pnoKeyID).css('opacity',0);
+
 }
 
 
