@@ -5,13 +5,28 @@
 }
 
 body {
+	height: 100%;
 	font: 1em Arial, sans-serif;
+	color: #488;
+}
+
+h4 {font-size: 1.3em; text-align: center; margin-bottom: 10px;}
+
+p {
+	line-height: 1.4em;
+	margin-bottom: 15px;
+}
+
+.wrapper {
+	min-height: 100%;
+	height: auto;
+	height: 100%;
+	margin: 0 auto -138px;
 }
 
 #banner {
-	background-color: #333;
-	height: 50px;
-	color: #fff;
+	background-color: #488;
+	padding: 10px 5px;
 }
 
 #keyboard {
@@ -157,13 +172,42 @@ body {
 	top: 250px;
 	left: 50%;
 	width: 300px;
+	height: 220px;
 	margin-left: -165px;
 	padding: 15px;
 	background-color: #fff;
-	border: 2px solid #333;
+	border: 2px solid #488;
 	border-radius: 10px;
+}
+
+#helpIcon {
+	display: inline-block;
+	width: 38px;
+	height: 38px;
+	cursor: pointer;
+}
+
+#legend {
+	width: 478px;
+	height: 138px;
+	margin: 0 auto;
+}
+
+.closeBtn {
+
+	cursor: pointer;
+	float: right;
 }
 
 .draggable {
 	cursor: move;
 }
+
+/*.push {
+	height: 138px;
+}
+
+#foot {
+	height: 138px;
+	background-color: #488;
+}*/

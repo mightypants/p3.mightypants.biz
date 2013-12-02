@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Little Guy Keyboard</title>
+    <title>jKeys</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script src="js/jquery-1.9.1.js"></script>
     <script src="js/jquery.jWebAudio.min.js"></script>
@@ -10,46 +10,53 @@
 </head>
 
 <body>
-<div id="audioFiles"></div>
-<div id="banner"><img class="btn" src="images/help.png" /></div>
-<div id="keyboard" class="draggable">
-    <div id="controlArea">
-        <div id="controls">
-            <div id="octaveControl">
-                <div id="octaveDown">
-                    <img class="btn_down" id="oct_down" src="images/btn_down.png" alt="octave down" />
+<div id="wrapper">
+    <div id="audioFiles"></div>
+    <div id="banner">
+        <img id="helpIcon" class="btn" src="images/help.png" />
+    </div>
+    <div id="keyboard" class="draggable">
+        <div id="controlArea">
+            <div id="controls">
+                <div id="octaveControl">
+                    <div id="octaveDown">
+                        <img class="btn_down" id="oct_down" src="images/btn_down.png" alt="octave down" />
+                    </div>
+                    <div id="octaveUp">
+                        <img class="btn_up" id="oct_up" src="images/btn_up.png" alt="octave up" />
+                    </div>
                 </div>
-                <div id="octaveUp">
-                    <img class="btn_up" id="oct_up" src="images/btn_up.png" alt="octave up" />
+                <div id="octaveReadout"><img id="octaveNum" src="images/oct_0.png" /></div>
+                <div id="instrumentReadout"><img id="instrumentName" src="images/epiano_txt.png" /></div>
+                <div id="instrumentControl">
+                    <div id="instrumentDown">
+                        <img class="btn_down" id="oct_down" src="images/btn_down.png" alt="instrument down" />
+                    </div>
+                    <div id="instrumentUp">
+                        <img class="btn_up" id="oct_up" src="images/btn_up.png" alt="instrument up" />
+                    </div>
                 </div>
+                
             </div>
-            <div id="octaveReadout"><img id="octaveNum" src="images/oct_0.png" /></div>
-            <div id="instrumentReadout"><img id="instrumentName" src="images/epiano_txt.png" /></div>
-            <div id="instrumentControl">
-                <div id="instrumentDown">
-                    <img class="btn_down" id="oct_down" src="images/btn_down.png" alt="instrument down" />
-                </div>
-                <div id="instrumentUp">
-                    <img class="btn_up" id="oct_up" src="images/btn_up.png" alt="instrument up" />
-                </div>
-            </div>
-            
+        </div>
+        <div id="keys">
+            <div id="keysLow"><div class="keyWhite blackRight" id="C"></div><div class="keyBlack" id="Cs"></div><div class="keyWhite blackBoth" id="D"></div><div class="keyBlack" id="Ds"></div><div class="keyWhite blackLeft" id="E"></div> <div class="keyWhite blackRight" id="F"></div><div class="keyBlack" id="Fs"></div><div class="keyWhite blackBoth" id="G"></div><div class="keyBlack" id="Gs"></div><div class="keyWhite blackBoth" id="A"></div><div class="keyBlack" id="As"></div><div class="keyWhite blackLeft" id="B"></div></div><div id="keysHigh"><div class="keyWhite blackRight" id="up_C"></div><div class="keyBlack" id="up_Cs"></div><div class="keyWhite blackBoth" id="up_D"></div><div class="keyBlack blackBoth" id="up_Ds"></div><div class="keyWhite blackLeft" id="up_E"></div><div class="keyWhite blackNone" id="up_F"></div></div>
         </div>
     </div>
-    <div id="keys">
-        <div id="keysLow"><div class="keyWhite blackRight" id="C"></div><div class="keyBlack" id="Cs"></div><div class="keyWhite blackBoth" id="D"></div><div class="keyBlack" id="Ds"></div><div class="keyWhite blackLeft" id="E"></div> <div class="keyWhite blackRight" id="F"></div><div class="keyBlack" id="Fs"></div><div class="keyWhite blackBoth" id="G"></div><div class="keyBlack" id="Gs"></div><div class="keyWhite blackBoth" id="A"></div><div class="keyBlack" id="As"></div><div class="keyWhite blackLeft" id="B"></div></div><div id="keysHigh"><div class="keyWhite blackRight" id="up_C"></div><div class="keyBlack" id="up_Cs"></div><div class="keyWhite blackBoth" id="up_D"></div><div class="keyBlack blackBoth" id="up_Ds"></div><div class="keyWhite blackLeft" id="up_E"></div><div class="keyWhite blackNone" id="up_F"></div></div>
+
+    <div id="help">
+        <p class="closeBtn">X</p>
+        <h4>Welcome to jKeys!</h4>
+        <p>Use your computer's keypad to play notes on the piano keyboard.  The controls on the top of the keyboard allow you to change the instrument and octave (plus or minus one octave).</p>
+        <p>You can click and drag to rearrange the keyboard and legend on the page as well.  Pretty sweet.</p>
+    </div>
+    <div class="push"></div>
+    <div id="foot">
+        <div id="legend" class="draggable">
+            <img src="images/keyboard_legend.png" />
+        </div>
     </div>
 </div>
-<div id="help">
-    <p>Use your computer's keypad to play notes on the piano keyboard.  The controls on the top of the keyboard allow you to change the instrument and octave (plus or minus one octave).</p>
-</div>
-
-
-<div id="legend" class="draggable">
-    <img src="images/keyboard_legend.png" />
-</div>
-    <p id="test1"></p>
-
 
 <script src="js/keyboard.js"></script>
 

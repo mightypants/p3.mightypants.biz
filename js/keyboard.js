@@ -43,20 +43,6 @@ $('.sound').each(function() {
 
 $("#keyboard").fadeIn(800);
 
-$("#help").click(function(){
-  $("#help").animate({
-    position: 'absolute',
-    left:'0px',
-    top:'0px',
-    opacity:'.3',
-    height:'10px',
-    width:'10px'
-  }, 'slow');
-});
-
-$(function() {
-    $( ".draggable" ).draggable();
-  });
 
 /****************************************************************************
 event listeners
@@ -76,10 +62,10 @@ $('body').keyup(function(){
 	}
 });
 
-$('.btn_up,.btn_down,.btn').hover(function(){
+$('.btn_up,.btn_down').hover(function(){
 	$(this).attr('src', 'images/' + $(this).attr('class') + '_hover.png');
 },function(){
-	$(this).attr('src', 'images/' + $(this).attr('class'));	
+	$(this).attr('src', 'images/' + $(this).attr('class') + '.png');	
 });
 
 $('#octaveUp').click(function(){
@@ -97,6 +83,55 @@ $('#instrumentUp').click(function(){
 $('#instrumentDown').click(function(){
 	prevInstrument();
 });
+
+$(function() {
+    $( ".draggable" ).draggable();
+ });
+
+$(".closeBtn").click(function(){
+    hideHelp();
+});
+
+$("#helpIcon").click(function(){
+    showHelp();
+});
+
+
+/****************************************************************************
+show help panel
+****************************************************************************/
+
+function showHelp() {
+	$("#help").animate({
+    left:'50%',
+    top:'250px',
+    opacity:'1',
+    height:'220px',
+    width:'300px'
+  	}, 'slow');
+}
+
+
+/****************************************************************************
+hide help panel
+****************************************************************************/
+
+function hideHelp() {
+	$("#help").animate({
+    left:'0px',
+    top:'0px',
+    opacity:'.3',
+    height:'10px',
+    width:'10px'
+  	}, 'slow', animateHelpIcon);
+}
+
+function animateHelpIcon() {
+	$('#helpIcon').attr('src', 'images/help_hover.png');
+	setTimeout(function(){
+		$('#helpIcon').attr('src', 'images/help.png');
+	}, 200);
+}
 
 
 /******************************************************************************************
@@ -121,13 +156,13 @@ function prevInstrument(){
 
 
 /******************************************************************************************
-change octaves
+change octave incrementally
 ******************************************************************************************/
 
 function octaveUp() {
 	if(octaveOffset < 2) {
 		octaveOffset++;
-		octaveImgURL = 'images/oct_' + (octaveOffset -1) + '.png';
+		octaveImgURL = 'images/oct_' + (octaveOffset - 1) + '.png';
 		$('#octaveNum').attr('src', octaveImgURL);
 		stopAllNotes();
 	}
@@ -136,10 +171,21 @@ function octaveUp() {
 function octaveDown(){
 	if(octaveOffset > 0) {
 		octaveOffset--;
-		octaveImgURL = 'images/oct_' + (octaveOffset -1) + '.png';
+		octaveImgURL = 'images/oct_' + (octaveOffset - 1) + '.png';
 		$('#octaveNum').attr('src', octaveImgURL);
 		stopAllNotes();
 	}
+}
+
+
+/******************************************************************************************
+change octave to a specific number
+******************************************************************************************/
+
+function setOctave(compKeyID){
+	octaveOffset = compKeyID - 53;
+	octaveImgURL = 'images/oct_' + (octaveOffset - 1) + '.png';
+	$('#octaveNum').attr('src', octaveImgURL);
 }
 
 
@@ -169,9 +215,14 @@ function mapKeys(compKeyID, action){
 		222: 'up_F' 
 	};
 
-	if(compKeyID in keyMap) {
+
+	if (compKeyID == 53 || compKeyID == 54 || compKeyID == 55) {
+		setOctave(compKeyID);
+	}
+	else if (compKeyID in keyMap) {
 		selectAudioEl(keyMap[compKeyID], action);
-	}	
+	}
+
 }
 
 
@@ -211,7 +262,7 @@ function playNote(audioID, pnoKeyID) {
     $('#' + pnoKeyID).css('opacity',.7);
 
     if(currInstrument == 'marimba') {
-    	//setTimeout(stopNote(audioID, pnoKeyID), 000);
+    	setTimeout(stopNote(audioID, pnoKeyID), 1000);
     	//console.log('stop you stupid marimba');
     }
 }
