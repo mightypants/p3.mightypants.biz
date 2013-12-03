@@ -3,6 +3,7 @@
 <head>
     <title>jKeys</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.3.custom.min.css">
     <script src="js/jquery-1.9.1.js"></script>
     <script src="js/jquery.jWebAudio.min.js"></script>
     <script src="js/jquery-ui-1.10.3.custom.js"></script>
@@ -10,7 +11,6 @@
 </head>
 
 <body>
-<div id="wrapper">
     <div id="audioFiles"></div>
     <div id="banner">
         <img id="helpIcon" class="btn" src="images/help.png" />
@@ -49,14 +49,14 @@
         <h4>Welcome to jKeys!</h4>
         <p>Use your computer's keypad to play notes on the piano keyboard.  The controls on the top of the keyboard allow you to change the instrument and octave (plus or minus one octave).</p>
         <p>You can click and drag to rearrange the keyboard and legend on the page as well.  Pretty sweet.</p>
-    </div>
-    <div class="push"></div>
-    <div id="foot">
-        <div id="legend" class="draggable">
-            <img src="images/keyboard_legend.png" />
+        <div id="loading">
+            <p id="loadingMsg">Loading...</p>
+            <div id="progressbar"></div>
         </div>
     </div>
-</div>
+    <div id="legend" class="draggable">
+        <img src="images/keyboard_legend.png" />
+    </div>
 
 <script src="js/keyboard.js"></script>
 

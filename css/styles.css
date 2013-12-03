@@ -17,13 +17,6 @@ p {
 	margin-bottom: 15px;
 }
 
-.wrapper {
-	min-height: 100%;
-	height: auto;
-	height: 100%;
-	margin: 0 auto -138px;
-}
-
 #banner {
 	background-color: #488;
 	padding: 10px 5px;
@@ -169,10 +162,10 @@ p {
 
 #help {
 	position: absolute;
-	top: 250px;
+	top: 200px;
 	left: 50%;
 	width: 300px;
-	height: 220px;
+	height: 310px;
 	margin-left: -165px;
 	padding: 15px;
 	background-color: #fff;
@@ -188,13 +181,17 @@ p {
 }
 
 #legend {
+	display: none;
 	width: 478px;
 	height: 138px;
 	margin: 0 auto;
 }
 
-.closeBtn {
+#progressbar{
+	margin-top: -10px;
+}
 
+.closeBtn {
 	cursor: pointer;
 	float: right;
 }
@@ -203,11 +200,3 @@ p {
 	cursor: move;
 }
 
-/*.push {
-	height: 138px;
-}
-
-#foot {
-	height: 138px;
-	background-color: #488;
-}*/

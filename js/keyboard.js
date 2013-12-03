@@ -6,6 +6,8 @@ var notes = Array('C','Cs','D','Ds','E','F','Fs','G','Gs','A','As','B');
 var octaveOffset = 1;
 var instruments = ['bass','epiano','marimba']
 var currInstrument = instruments[1];
+var loadPercentage = 0;
+var allFilesLoaded = false;
 
 for(i in notes) {
 	//notes C through F appear on the keyboard twice each, others only once
@@ -38,10 +40,27 @@ $('.sound').each(function() {
         'url': url,
         'volume': parseInt(80)
 	});
-    $(this).jWebAudio('load');
+    $(this).jWebAudio('load', countAudioFiles);
 });
 
-$("#keyboard").fadeIn(800);
+//mark when all audio files are loaded--certain functions/events won't run 
+//while files are loading
+function countAudioFiles() {
+	loadPercentage += .7936;
+	
+	$(function() {
+    	$( "#progressbar" ).progressbar({
+      	value: loadPercentage
+    	});
+  	});
+
+	if (loadPercentage > 99.9) {
+		allFilesLoaded = true;
+		$("#keyboard").fadeIn(800);
+		$("#legend").fadeIn(800);
+		$('#loadingMsg').html('<b>Done!</b>');
+	};
+}
 
 
 /****************************************************************************
@@ -49,11 +68,15 @@ event listeners
 ****************************************************************************/
 
 $('.keyWhite,.keyBlack').mousedown(function(){	
-	selectAudioEl(this.id, 'play');
+	if(allFilesLoaded){
+		selectAudioEl(this.id, 'play');
+	}
 });
 
 $('body').keydown(function(){
-	mapKeys(event.which, 'play');
+	if(allFilesLoaded) {
+		mapKeys(event.which, 'play');
+	}
 });
 
 $('body').keyup(function(){
@@ -69,19 +92,27 @@ $('.btn_up,.btn_down').hover(function(){
 });
 
 $('#octaveUp').click(function(){
-	octaveUp();
+	if (allFilesLoaded) {
+		octaveUp();
+	}	
 });
 
 $('#octaveDown').click(function(){
-	octaveDown();
+	if(allFilesLoaded){
+		octaveDown();
+	}
 });
 
 $('#instrumentUp').click(function(){
-	nextInstrument();
+	if(allFilesLoaded){
+		nextInstrument();
+	}
 });
 
 $('#instrumentDown').click(function(){
-	prevInstrument();
+	if(allFilesLoaded){
+		prevInstrument();
+	}
 });
 
 $(function() {
@@ -104,9 +135,9 @@ show help panel
 function showHelp() {
 	$("#help").animate({
     left:'50%',
-    top:'250px',
+    top:'200px',
     opacity:'1',
-    height:'220px',
+    height:'225px',
     width:'300px'
   	}, 'slow');
 }
@@ -124,6 +155,10 @@ function hideHelp() {
     height:'10px',
     width:'10px'
   	}, 'slow', animateHelpIcon);
+
+  	setTimeout(function(){
+  		$('#loading').empty();
+  	}, 1000);
 }
 
 function animateHelpIcon() {
@@ -261,13 +296,12 @@ function playNote(audioID, pnoKeyID) {
     $('#' + audioID).jWebAudio('play');
     $('#' + pnoKeyID).css('opacity',.7);
 
-    if(currInstrument == 'marimba') {
-    	setTimeout(stopNote(audioID, pnoKeyID), 1000);
-    	//console.log('stop you stupid marimba');
-    }
+    if (currInstrument == 'marimba'){
+    	setTimeout(function(){
+    		stopNote(audioID, pnoKeyID);
+    	}, 2000);
+	}
 }
-
-
 /******************************************************************************************
 stop the audio file for the called note, remove highlight from played key
 ******************************************************************************************/
