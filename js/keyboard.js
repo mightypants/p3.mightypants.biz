@@ -38,13 +38,12 @@ $('.sound').each(function() {
 	var url = 'audio/' + $(this).attr('id') + '.mp3';
 	$(this).jWebAudio('addSoundSource', {
         'url': url,
-        'volume': parseInt(80)
+        'volume': parseInt(70)
 	});
     $(this).jWebAudio('load', countAudioFiles);
 });
 
-//mark when all audio files are loaded--certain functions/events won't run 
-//while files are loading
+//animate progress bar, mark when all files are complete
 function countAudioFiles() {
 	loadPercentage += .7936;
 	
@@ -307,11 +306,12 @@ stop the audio file for the called note, remove highlight from played key
 ******************************************************************************************/
 
 function stopNote(audioID, pnoKeyID) {
-	var vol = 80;
+	var vol = 70;
 
 	//do short fadeout when stopping the note to avoid pops
 	var fadeOut = setInterval(
 		function(){
+			console.log(vol);
 			if (vol > 10) {
 				vol -= 12;
 			}
