@@ -38,7 +38,7 @@ $('.sound').each(function() {
 	var url = 'audio/' + $(this).attr('id') + '.mp3';
 	$(this).jWebAudio('addSoundSource', {
         'url': url,
-        'volume': parseInt(70)
+        'volume': parseInt(65)
 	});
     $(this).jWebAudio('load', countAudioFiles);
 });
@@ -131,14 +131,16 @@ $("#helpIcon").click(function(){
 show help panel
 ****************************************************************************/
 
-function showHelp() {
-	$("#help").animate({
-    left:'50%',
-    top:'200px',
-    opacity:'1',
-    height:'225px',
-    width:'300px'
-  	}, 'slow');
+function showHelp() {	
+	if ($('#help').css('width') == '10px'){
+		$("#help").animate({
+	    left:'50%',
+	    top:'200px',
+	    opacity:'1',
+	    height:'225px',
+	    width:'300px'
+	  	}, 'slow');
+	}
 }
 
 
@@ -224,7 +226,7 @@ function setOctave(compKeyID){
 
 
 /******************************************************************************************
-when computer keyboard key is pressed, map to corresponding piano key div ID
+map computer keyboard input to piano key or to the octave setter
 ******************************************************************************************/
 
 function mapKeys(compKeyID, action){
@@ -248,7 +250,6 @@ function mapKeys(compKeyID, action){
 		186: 'up_E',
 		222: 'up_F' 
 	};
-
 
 	if (compKeyID == 53 || compKeyID == 54 || compKeyID == 55) {
 		setOctave(compKeyID);
@@ -301,17 +302,18 @@ function playNote(audioID, pnoKeyID) {
     	}, 2000);
 	}
 }
+
+
 /******************************************************************************************
 stop the audio file for the called note, remove highlight from played key
 ******************************************************************************************/
 
 function stopNote(audioID, pnoKeyID) {
-	var vol = 70;
+	var vol = 65;
 
 	//do short fadeout when stopping the note to avoid pops
 	var fadeOut = setInterval(
 		function(){
-			console.log(vol);
 			if (vol > 10) {
 				vol -= 12;
 			}
@@ -327,7 +329,7 @@ function stopNote(audioID, pnoKeyID) {
 			else {
 				$('#' + audioID).jWebAudio('stop');
 				$('#' + audioID).jWebAudio('options', {
-	    			'volume': parseInt(100),
+	    			'volume': parseInt(65),
 				});
 				clearInterval(fadeOut);
 			}
