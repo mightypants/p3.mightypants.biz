@@ -173,6 +173,19 @@ p {
 	border-radius: 10px;
 }
 
+.closeBtn {
+	cursor: pointer;
+	float: right;
+}
+
+.notice {
+	font-size: .75em;
+}
+
+#progressbar{
+	margin-top: -10px;
+}
+
 #helpIcon {
 	display: inline-block;
 	width: 38px;
@@ -187,19 +200,6 @@ p {
 	margin: 0 auto;
 }
 
-#progressbar{
-	margin-top: -10px;
-}
-
-.closeBtn {
-	cursor: pointer;
-	float: right;
-}
-
 .draggable {
 	cursor: move;
-}
-
-.notice {
-	font-size: .75em;
 }

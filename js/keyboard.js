@@ -20,7 +20,7 @@ for(i in notes) {
 		notes[i] == 'E' ||
 		notes[i] == 'F' ) 
 	{
-		numOctavesOnKB = 4; //TODO: change these to 4, 3 when all octaves are enabled
+		numOctavesOnKB = 4; 
 	}
 	else {
 		numOctavesOnKB = 3;
@@ -43,7 +43,7 @@ $('.sound').each(function() {
     $(this).jWebAudio('load', countAudioFiles);
 });
 
-//animate progress bar, mark when all files are complete
+//animate progress bar, mark when all files have finished loading
 function countAudioFiles() {
 	loadPercentage += .7936;
 	
@@ -66,6 +66,8 @@ function countAudioFiles() {
 event listeners
 ****************************************************************************/
 
+//any event that calls one or more notes will be unable to be called until all files have finished loading
+//instrument and octave switchers call stopAllNotes()
 $('.keyWhite,.keyBlack').mousedown(function(){	
 	if(allFilesLoaded){
 		selectAudioEl(this.id, 'playthrough');
@@ -192,7 +194,7 @@ function prevInstrument(){
 
 
 /******************************************************************************************
-change octave incrementally - responds to click of control
+change octave incrementally - responds to click of arrows
 ******************************************************************************************/
 
 function octaveUp() {
@@ -215,7 +217,7 @@ function octaveDown(){
 
 
 /******************************************************************************************
-change octave to a specific number - responds to keydown
+change octave to a specific number - responds to keydown of number keys 5, 6, 7
 ******************************************************************************************/
 
 function setOctave(compKeyID){
@@ -257,7 +259,6 @@ function mapKeys(compKeyID, action){
 	else if (compKeyID in keyMap) {
 		selectAudioEl(keyMap[compKeyID], action);
 	}
-
 }
 
 
@@ -311,7 +312,7 @@ function highlightKey(pnoKeyID, action) {
 
 
 /******************************************************************************************
-unhighlight played key on the keyboard
+unhighlight played key 
 ******************************************************************************************/
 
 function unhighlightKey(pnoKeyID) {
@@ -336,7 +337,7 @@ function playNote(audioID, action) {
 
 
 /******************************************************************************************
-stop the audio file for the called note, remove highlight from played key
+stop the audio file for the called note
 ******************************************************************************************/
 
 function stopNote(audioID, pnoKeyID) {
