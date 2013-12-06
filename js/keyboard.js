@@ -135,10 +135,10 @@ function showHelp() {
 	if ($('#help').css('width') == '10px'){
 		$("#help").animate({
 	    left:'50%',
-	    top:'200px',
+	    top:'180px',
 	    opacity:'1',
-	    height:'225px',
-	    width:'300px'
+	    height:'250px',
+	    width:'310px'
 	  	}, 'slow');
 	}
 }
@@ -278,7 +278,7 @@ function selectAudioEl(pnoKeyID, action){
 		audioElID = pnoKeyID + octaveOffset + currInstrument;
 	}
 	
-	//force playth
+	//force playthrough mode for marimba
 	action = currInstrument == 'marimba' ? 'playthrough' : action;
 
 	//'play' will sustain the note as long as key is down
