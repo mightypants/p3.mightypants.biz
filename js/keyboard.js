@@ -68,7 +68,7 @@ event listeners
 
 $('.keyWhite,.keyBlack').mousedown(function(){	
 	if(allFilesLoaded){
-		selectAudioEl(this.id, 'play');
+		selectAudioEl(this.id, 'playthrough');
 	}
 });
 
@@ -192,7 +192,7 @@ function prevInstrument(){
 
 
 /******************************************************************************************
-change octave incrementally
+change octave incrementally - responds to click of control
 ******************************************************************************************/
 
 function octaveUp() {
@@ -215,7 +215,7 @@ function octaveDown(){
 
 
 /******************************************************************************************
-change octave to a specific number
+change octave to a specific number - responds to keydown
 ******************************************************************************************/
 
 function setOctave(compKeyID){
@@ -278,28 +278,59 @@ function selectAudioEl(pnoKeyID, action){
 		audioElID = pnoKeyID + octaveOffset + currInstrument;
 	}
 	
+	//force playth
+	action = currInstrument == 'marimba' ? 'playthrough' : action;
 
-	if (action == 'play') {
-		playNote(audioElID, pnoKeyID);
+	//'play' will sustain the note as long as key is down
+	//'playthrough' plays to the end of the audio file regardless
+	if (action == 'play' || action == 'playthrough') {
+		playNote(audioElID, action);
+		highlightKey(pnoKeyID, action);
+
 	}
 	else {
 		stopNote(audioElID, pnoKeyID);
+		unhighlightKey(pnoKeyID);
 	}	
 }
 
 
 /******************************************************************************************
-play the audio file for the called note, highlight the key on the keyboard
+highlight played key on the keyboard
 ******************************************************************************************/
 
-function playNote(audioID, pnoKeyID) {
-    $('#' + audioID).jWebAudio('play');
+function highlightKey(pnoKeyID, action) {
     $('#' + pnoKeyID).css('opacity',.7);
 
-    if (currInstrument == 'marimba'){
+	if (action == 'playthrough'){
     	setTimeout(function(){
-    		stopNote(audioID, pnoKeyID);
-    	}, 2000);
+    		unhighlightKey(pnoKeyID);
+    	}, 100);
+	}
+}
+
+
+/******************************************************************************************
+unhighlight played key on the keyboard
+******************************************************************************************/
+
+function unhighlightKey(pnoKeyID) {
+    $('#' + pnoKeyID).css('opacity',0);
+}
+
+
+/******************************************************************************************
+play the audio file for the called note
+******************************************************************************************/
+
+function playNote(audioID, action) {
+    $('#' + audioID).jWebAudio('play');
+
+	var sustain = currInstrument == 'marimba' ? 1600 : 6000;
+	if (action == 'playthrough'){
+    	setTimeout(function(){
+    		stopNote(audioID);
+    	}, sustain);
 	}
 }
 
@@ -336,9 +367,6 @@ function stopNote(audioID, pnoKeyID) {
 		}, 
 		1 //miliseconds for setInterval
 	);
-
-	$('#' + pnoKeyID).css('opacity',0);
-
 }
 
 
@@ -351,7 +379,4 @@ function stopAllNotes(){
     	$(this).jWebAudio('stop');
 });
 }
-
-
-
 
